@@ -1,25 +1,17 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   useReactTable,
-  CellContext,
-  FilterFn,
-  getPaginationRowModel,
   getSortedRowModel,
-  PaginationState,
   getFacetedMinMaxValues,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  sortingFns,
   type ColumnFiltersState,
-  type Header as HeaderProps,
   type Row as RowProps,
   type SortingState,
-  TableMeta,
   RowData
 } from '@tanstack/react-table';
 
@@ -29,12 +21,12 @@ import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable';
 
 import { Head, Header, Body, Cell, Row } from '.';
-import { Person, makeColumns, makeData } from '../makeData';
+import { Person } from '../makeData';
 import { SizeFeature, SizeState } from './features/size';
 
 import { useTableVirtualizer } from '../hooks/useTableVirtualizer';
 import { useTableDnD } from '../hooks/useTableDnD';
-import CellsRange from './CellsRange';
+// import CellsRange from './CellsRange';
 
 declare module '@tanstack/react-table' {
   interface TableMeta<TData extends RowData> {
@@ -61,7 +53,7 @@ export const Table = ({ columns, data: DefaultData, size }: TableProps) => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
 
-  const [cellsRange, setCellsRange] = useState<Map<string, any>>(new Map());
+  // const [cellsRange, setCellsRange] = useState<Map<string, any>>(new Map());
   // const [size, setSize] = useState<SizeState>(DefaultSize);
   const [cellEditing, setCellEditing] = useState('');
 
@@ -150,7 +142,7 @@ export const Table = ({ columns, data: DefaultData, size }: TableProps) => {
               return (
                 <Row
                   data-index={virtualRow.index}
-                  ref={node => rowVirtualizer.measureElement(node)}
+                  ref={node => rowVirtualizer.measureElement(node as Element)}
                   key={row.id}
                   style={{
                     position: 'absolute',

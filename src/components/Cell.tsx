@@ -22,7 +22,7 @@ export const Cell = ({ cell }: Props) => {
 
   return (
     <td
-      className={`relative select-none border-divider transition-[padding] p-${size}`}
+      className={`relative select-none border-divider p-${size}`}
       style={{ width: cell.column.getSize() }}
       onDoubleClick={handleDblClick}
     >

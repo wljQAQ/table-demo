@@ -22,8 +22,7 @@ export const Head = ({ header }: { header: HeaderProps<Person, unknown> }) => {
 
   const style: CSSProperties = {
     opacity: isDragging ? 0.8 : 1,
-    transform: CSS.Translate.toString(transform), // translate instead of transform to avoid squishing
-    transition: 'width transform 0.3s ease-in-out',
+    transform: CSS.Translate.toString(transform),
     whiteSpace: 'nowrap',
     width: header.getSize(),
     zIndex: isDragging ? 1 : 0
@@ -41,7 +40,7 @@ export const Head = ({ header }: { header: HeaderProps<Person, unknown> }) => {
   return (
     <th
       ref={setNodeRef}
-      className={`p-${size} bg-header relative flex cursor-pointer select-none flex-wrap items-center border-b border-divider p-4 text-left font-semibold transition-[padding]`}
+      className={`p-${size} relative flex cursor-pointer select-none flex-wrap items-center border-b border-divider bg-header p-4 text-left font-semibold`}
       style={style}
       colSpan={header.colSpan}
       onClick={handleClick}
@@ -62,11 +61,13 @@ export const Head = ({ header }: { header: HeaderProps<Person, unknown> }) => {
           <Filter column={header.column} table={table} />
         </div>
       ) : null} */}
-      <Divider
+      <div
+        className="absolute right-0 top-1/2 z-10 -translate-y-1/2 cursor-ew-resize p-2"
         onMouseDown={handleResize}
-        className="border- absolute right-0 top-1/2 -translate-y-1/2 cursor-ew-resize p-2"
-        type="vertical"
-      />
+        onClick={e => e.stopPropagation()}
+      >
+        <Divider type="vertical" />
+      </div>
     </th>
   );
 };

@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout, Button, Space, Radio } from 'antd';
+import { ConfigProvider, Layout, Button, Space, Radio, theme as antdTheme, Switch } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 const { Header, Content } = Layout;
 import { Table } from './components';
@@ -12,12 +12,37 @@ function App() {
   const columns = useMemo<ColumnDef<Person>[]>(() => makeColumns(22, null), []);
   const [data, setData] = useState(makeData(1_000, columns));
   const [size, setSize] = useState<SizeState>('middle');
+  const [theme, setTheme] = useState('light');
+
   console.log('app render');
+
+  const themeObj = useMemo(() => {
+    return {
+      antd: theme === 'light' ? antdTheme.defaultAlgorithm : antdTheme.darkAlgorithm
+    };
+  }, [theme]);
+
+  function onChangeTheme(e) {
+    if (e) {
+      setTheme('light');
+      document.documentElement.classList.remove('dark');
+    } else {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+    }
+  }
   return (
     <>
-      <ConfigProvider locale={zhCN}>
+      <ConfigProvider
+        locale={zhCN}
+        theme={{
+          algorithm: themeObj.antd
+        }}
+      >
         <Layout className="h-full w-full">
-          <Header className="bg-white shadow-sm">111</Header>
+          <Header className=" bg-white shadow-sm">
+            <Switch checkedChildren="light" unCheckedChildren="dark" defaultChecked onChange={onChangeTheme} />
+          </Header>
           <Content className="p-6">
             <div className="flex h-full flex-col rounded-lg bg-white p-4">
               <Space className="pb-4">
@@ -29,7 +54,7 @@ function App() {
                   <Radio.Button value="small">Small</Radio.Button>
                 </Radio.Group>
               </Space>
-              <Table className="flex-1" columns={columns} data={data} size={size}></Table>
+              <Table columns={columns} data={data} size={size}></Table>
             </div>
           </Content>
         </Layout>

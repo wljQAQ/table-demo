@@ -1,5 +1,9 @@
-import { forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 
-export const Row = forwardRef((props: React.HTMLAttributes<HTMLTableRowElement>, ref) => {
-  return <tr ref={ref} className="hover:bg-header flex w-full border-b border-divider" {...props}></tr>;
+type RowProps = React.HTMLAttributes<HTMLTableRowElement> & {
+  children?: ReactNode;
+};
+
+export const Row = forwardRef<HTMLTableRowElement, RowProps>((props, ref) => {
+  return <tr ref={ref} className="flex w-full border-b border-divider hover:bg-header" {...props}></tr>;
 });
