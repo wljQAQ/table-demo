@@ -40,7 +40,7 @@ function App() {
         }}
       >
         <Layout className="h-full w-full">
-          <Header className=" bg-white shadow-sm">
+          <Header className="bg-primary shadow-sm">
             <Switch checkedChildren="light" unCheckedChildren="dark" defaultChecked onChange={onChangeTheme} />
           </Header>
           <Content className="p-6">

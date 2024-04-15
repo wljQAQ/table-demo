@@ -1,21 +1,35 @@
 /** @type {import('tailwindcss').Config} */
+
+function withOpacity(variableName) {
+  return ({ opacityValue }) => {
+    if (opacityValue) {
+      return `rgba(var(${variableName}), ${opacityValue})`;
+    }
+    return `rgb(var(${variableName}))`;
+  };
+}
+
 const plugin = require('tailwindcss/plugin');
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   safelist: ['p-small', 'p-middle', 'p-large'],
   theme: {
-    color: {
-      title: 'red'
-    },
     extend: {
       padding: {
         small: '0.5rem',
         middle: '0.75rem',
         large: '1rem'
       },
+      textColor: {
+        primary: withOpacity('--color-primary'),
+        secondary: withOpacity('--color-secondary')
+      },
       backgroundColor: {
-        header: 'rgb(250, 250, 250)'
+        containHeader: 'var(--color-base)',
+        primary: withOpacity('--color-primary'),
+        secondary: withOpacity('--color-secondary'),
+        muted: withOpacity('--color-text-muted')
       },
       borderColor: {
         divider: 'rgb(240, 240, 240)'
