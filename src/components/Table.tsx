@@ -40,9 +40,10 @@ interface TableProps {
   columns: ColumnDef<Person>[];
   data: Person[];
   size: SizeState;
+  globalFilter: string;
 }
 
-export const Table = ({ columns, data: DefaultData, size }: TableProps) => {
+export const Table = ({ columns, data: DefaultData, size, globalFilter }: TableProps) => {
   const tableContainerRef = useRef<HTMLDivElement>(null);
   // const columns = useMemo<ColumnDef<Person>[]>(() => makeColumns(22, Cell), []);
   // const columns = useMemo<ColumnDef<Person>[]>(() => DefaultCol || [], []);
@@ -51,7 +52,7 @@ export const Table = ({ columns, data: DefaultData, size }: TableProps) => {
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [globalFilter, setGlobalFilter] = useState('');
+  // const [globalFilter, setGlobalFilter] = useState('');
 
   // const [cellsRange, setCellsRange] = useState<Map<string, any>>(new Map());
   // const [size, setSize] = useState<SizeState>(DefaultSize);
@@ -94,9 +95,7 @@ export const Table = ({ columns, data: DefaultData, size }: TableProps) => {
     },
     // onSizeChange: setSize,
     onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter,
     onColumnOrderChange: setColumnOrder,
-    getFilteredRowModel: getFilteredRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),

@@ -22,14 +22,15 @@ export default {
         large: '1rem'
       },
       textColor: {
-        primary: withOpacity('--color-primary'),
-        secondary: withOpacity('--color-secondary')
+        primary: '--color-primary',
+        secondary: '--color-secondary',
+        muted: '--color-text-muted'
       },
       backgroundColor: {
         containHeader: 'var(--color-base)',
-        primary: withOpacity('--color-primary'),
-        secondary: withOpacity('--color-secondary'),
-        muted: withOpacity('--color-text-muted')
+        primary: '--color-primary',
+        secondary: '--color-secondary',
+        muted: '--color-text-muted'
       },
       borderColor: {
         divider: 'rgb(240, 240, 240)'

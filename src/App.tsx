@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout, Button, Space, Radio, theme as antdTheme, Switch } from 'antd';
+import { ConfigProvider, Layout, Button, Space, Radio, theme as antdTheme, Switch, Input } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 const { Header, Content } = Layout;
 import { Table } from './components';
@@ -13,6 +13,8 @@ function App() {
   const [data, setData] = useState(makeData(1_000, columns));
   const [size, setSize] = useState<SizeState>('middle');
   const [theme, setTheme] = useState('light');
+
+  const [filter, setFilter] = useState('');
 
   console.log('app render');
 
@@ -40,12 +42,13 @@ function App() {
         }}
       >
         <Layout className="h-full w-full">
-          <Header className="bg-primary shadow-sm">
+          <Header className="bg-containHeader shadow-sm">
             <Switch checkedChildren="light" unCheckedChildren="dark" defaultChecked onChange={onChangeTheme} />
           </Header>
           <Content className="p-6">
-            <div className="flex h-full flex-col rounded-lg bg-white p-4">
+            <div className="bg-containHeader flex h-full flex-col rounded-lg p-4">
               <Space className="pb-4">
+                <Input value={filter} onChange={e => setFilter(e.target.value)} />
                 <Button>筛选</Button>
                 <Button>排序</Button>
                 <Radio.Group defaultValue="middle" onChange={e => setSize(e.target.value)}>
@@ -54,7 +57,7 @@ function App() {
                   <Radio.Button value="small">Small</Radio.Button>
                 </Radio.Group>
               </Space>
-              <Table columns={columns} data={data} size={size}></Table>
+              <Table columns={columns} data={data} size={size} globalFilter={filter} setFilter={setFilter}></Table>
             </div>
           </Content>
         </Layout>

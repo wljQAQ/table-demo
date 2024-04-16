@@ -40,7 +40,7 @@ export const Head = ({ header }: { header: HeaderProps<Person, unknown> }) => {
   return (
     <th
       ref={setNodeRef}
-      className={`p-${size} relative flex cursor-pointer select-none flex-wrap items-center border-b border-divider bg-header p-4 text-left font-semibold`}
+      className={`p-${size} relative flex cursor-pointer select-none flex-wrap items-center border-b border-divider bg-containHeader p-4 text-left font-semibold`}
       style={style}
       colSpan={header.colSpan}
       onClick={handleClick}
