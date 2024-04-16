@@ -41,9 +41,11 @@ interface TableProps {
   data: Person[];
   size: SizeState;
   globalFilter: string;
+  columnFilters: ColumnFiltersState;
 }
 
-export const Table = ({ columns, data: DefaultData, size, globalFilter }: TableProps) => {
+export const Table = ({ columns, data: DefaultData, size, globalFilter, columnFilters }: TableProps) => {
+  console.log(columnFilters);
   const tableContainerRef = useRef<HTMLDivElement>(null);
   // const columns = useMemo<ColumnDef<Person>[]>(() => makeColumns(22, Cell), []);
   // const columns = useMemo<ColumnDef<Person>[]>(() => DefaultCol || [], []);
@@ -51,7 +53,7 @@ export const Table = ({ columns, data: DefaultData, size, globalFilter }: TableP
   const [data, setData] = useState(DefaultData || []);
 
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   // const [globalFilter, setGlobalFilter] = useState('');
 
   // const [cellsRange, setCellsRange] = useState<Map<string, any>>(new Map());
@@ -94,9 +96,10 @@ export const Table = ({ columns, data: DefaultData, size, globalFilter }: TableP
       }
     },
     // onSizeChange: setSize,
-    onColumnFiltersChange: setColumnFilters,
+    // onColumnFiltersChange: setColumnFilters,
     onColumnOrderChange: setColumnOrder,
     getFacetedRowModel: getFacetedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
     onSortingChange: setSorting,
