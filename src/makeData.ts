@@ -8,7 +8,7 @@ export const makeColumns = (num: number, Cell: any) =>
       accessorKey: i.toString(),
       header: 'Column ' + i.toString(),
       size: Math.floor(Math.random() * 150) + 100,
-      filterFn: 'equalsString'
+      // filterFn: 'equalsString'
       // cell: Cell,
     };
   });
